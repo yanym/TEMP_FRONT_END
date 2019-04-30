@@ -14,48 +14,31 @@ export default class Showtime extends React.Component {
   }
   componentWillMount() {
     //模拟获取的网络数据，数据如下
-    const dataTest = [{
-      id: '2014669',
-      days: 1,
-      calve: 'Yes'
-    }, {
-      id: '2014670',
-      days: 2,
-      calve: 'Yes'
-    }, {
-      id: '2014671',
-      days: 3,
-      calve: 'Yes'
-    }, {
-      id: '2014672',
-      days: 4,
-      calve: 'Yes'
-    }];
-/*
-    axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
+    // const dataTest = [{
+    //   id: '2014669',
+    //   days: 1,
+    //   calve: 'Yes'
+    // }, {
+    //   id: '2014670',
+    //   days: 2,
+    //   calve: 'Yes'
+    // }, {
+    //   id: '2014671',
+    //   days: 3,
+    //   calve: 'Yes'
+    // }, {
+    //   id: '2014672',
+    //   days: 4,
+    //   calve: 'Yes'
+    // }];
+
+    // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
+    axios.get(`./test.json`)
       .then(res => {
-        // TBD
-        for (var i = 0, l = dataTest.length; i < l; i++) {
-          this.state.dataSource.push(dataTest[i]);
+        for (var i = 0, l = res.data.length; i < l; i++) {
+          this.state.dataSource.push(res.data[i]);
       }
-      */
-     this.state.dataSource = dataTest;
-        // console.log(res.data)
-        // this.state.dataSource.push(dataTest);
-        // console.log(this.state.dataSource);
-
-
-
-        // res.data.map((v,i) => {
-        //   console.log(v);
-        //   this.state.dataSource.push({
-        //     key: v.id,
-        //     id: v.id,
-        //     calve:v.title,
-        //   })
-        // })
-// 这里还有一个
-    //});
+    });
 
     //解析，丢到datasource中
     // data.map((v,i) => {
