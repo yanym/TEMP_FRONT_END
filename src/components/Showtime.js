@@ -85,13 +85,13 @@ export default class Showtime extends React.Component {
     
     const columns = [
     {
-      title: 'id',
+      title: 'Cow ID',
       dataIndex: 'id',
       key: 'id',
       sorter: (a, b) => a.id - b.id,
       sortOrder: sortedInfo.columnKey === 'id' && sortedInfo.order,
     }, {
-      title: 'probability',
+      title: 'Calving Probability in 24 Hours (%)',
       dataIndex: 'probability',
       key: 'probability',
       sorter: (a, b) => a.probability - b.probability,
