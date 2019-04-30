@@ -12,7 +12,7 @@ export default class Showtime extends React.Component {
       dataSource: []
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     //模拟获取的网络数据，数据如下
     // const dataTest = [{
     //   id: '2014669',
@@ -33,7 +33,7 @@ export default class Showtime extends React.Component {
     // }];
 
     // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
-    axios.get(`./test.json`)
+    axios.get(`./predict_result.json`)
       .then(res => {
         for (var i = 0, l = res.data.length; i < l; i++) {
           this.state.dataSource.push(res.data[i]);
@@ -91,12 +91,14 @@ export default class Showtime extends React.Component {
       sorter: (a, b) => a.id - b.id,
       sortOrder: sortedInfo.columnKey === 'id' && sortedInfo.order,
     }, {
-      title: 'days',
-      dataIndex: 'days',
-      key: 'days',
-      sorter: (a, b) => a.days - b.days,
-      sortOrder: sortedInfo.columnKey === 'days' && sortedInfo.order,
-    }, {
+      title: 'probability',
+      dataIndex: 'probability',
+      key: 'probability',
+      sorter: (a, b) => a.probability - b.probability,
+      sortOrder: sortedInfo.columnKey === 'probability' && sortedInfo.order,
+    }
+    /*
+    , {
       title: 'calve',
       dataIndex: 'calve',
       key: 'calve',
@@ -109,6 +111,7 @@ export default class Showtime extends React.Component {
       sorter: (a, b) => a.calve.length - b.calve.length,
       sortOrder: sortedInfo.columnKey === 'calve' && sortedInfo.order,
     }
+    */
     
     // , {
     //   title: 'Address',
@@ -133,7 +136,7 @@ export default class Showtime extends React.Component {
           <Button onClick={this.clearAll}>Clear filters and sorters</Button>
           <Button onClick={this.clearAll}>Refresh</Button>
         </div>
-        <Table columns={columns} dataSource={this.state.dataSource} onChange={this.handleChange} />
+        <Table columns={columns} dataSource={this.state.dataSource} onChange={this.handleChange} pagination={false} />
       </div>
     );
   }
