@@ -12,7 +12,7 @@ export default class Showtime extends React.Component {
       dataSource: []
     }
   }
-  componentDidMount() {
+  componentWillMount() {
     //模拟获取的网络数据，数据如下
     // const dataTest = [{
     //   id: '2014669',
