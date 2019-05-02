@@ -13,41 +13,18 @@ export default class Showtime extends React.Component {
     }
   }
   componentWillMount() {
-    //模拟获取的网络数据，数据如下
-    // const dataTest = [{
-    //   id: '2014669',
-    //   days: 1,
-    //   calve: 'Yes'
-    // }, {
-    //   id: '2014670',
-    //   days: 2,
-    //   calve: 'Yes'
-    // }, {
-    //   id: '2014671',
-    //   days: 3,
-    //   calve: 'Yes'
-    // }, {
-    //   id: '2014672',
-    //   days: 4,
-    //   calve: 'Yes'
-    // }];
-
-    // axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
-    axios.get(`./predict_result.json`)
+    axios.get(`./predict_result1.json`)
       .then(res => {
         for (var i = 0, l = res.data.length; i < l; i++) {
           this.state.dataSource.push(res.data[i]);
       }
     });
-
-    //解析，丢到datasource中
-    // data.map((v,i) => {
-    //   this.state.dataSource.push({
-    //     key: v.id,
-    //     id: v.id,
-    //     calve:v.calve,
-    //   })
-    // })
+    axios.get(`./predict_result2.json`)
+      .then(res => {
+        for (var i = 0, l = res.data.length; i < l; i++) {
+          this.state.dataSource.push(res.data[i]);
+      }
+    });
   }
 
   handleChange = (pagination, filters, sorter) => {
@@ -96,6 +73,12 @@ export default class Showtime extends React.Component {
       key: 'probability',
       sorter: (a, b) => a.probability - b.probability,
       sortOrder: sortedInfo.columnKey === 'probability' && sortedInfo.order,
+    }, {
+      title: 'Timestamp',
+      dataIndex: 'ts',
+      key: 'ts',
+      sorter: (a, b) => a.Timestamp - b.Timestamp,
+      sortOrder: sortedInfo.columnKey === 'ts' && sortedInfo.order,
     }
     /*
     , {
