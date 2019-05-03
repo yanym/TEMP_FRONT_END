@@ -12,23 +12,51 @@ export default class Showtime extends React.Component {
       dataSource: []
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     axios.get(`./predict_result1.json`)
       .then(res => {
-        for (var i = 0, l = res.data.length; i < l; i++) {
-          this.state.dataSource.push(res.data[i]);
-      }
+        for (let i = 0, l = res.data.length; i < l; i++) {
+          let len = this.state.dataSource.length;
+          let findIt = 0;
+          for (let j = 0; j < len; j++) {
+            if (res.data[i].id === this.state.dataSource[j].id) {
+              console.log(res.data[i].id);
+              findIt = 1;
+              if (this.state.dataSource[j].ts < res.data[i].ts) {
+                this.state.dataSource.splice(j, 1);
+                this.state.dataSource.push(res.data[i]);
+              }
+            }
+          }
+          if (findIt === 0) {
+            this.state.dataSource.push(res.data[i]);
+          }
+        }
     });
     axios.get(`./predict_result2.json`)
       .then(res => {
-        for (var i = 0, l = res.data.length; i < l; i++) {
-          this.state.dataSource.push(res.data[i]);
-      }
+        for (let i = 0, l = res.data.length; i < l; i++) {
+          let len = this.state.dataSource.length;
+          let findIt = 0;
+          for (let j = 0; j < len; j++) {
+            if (res.data[i].id === this.state.dataSource[j].id) {
+              console.log(res.data[i].id);
+              findIt = 1;
+              if (this.state.dataSource[j].ts < res.data[i].ts) {
+                this.state.dataSource.splice(j, 1);
+                this.state.dataSource.push(res.data[i]);
+              }
+            }
+          }
+          if (findIt === 0) {
+            this.state.dataSource.push(res.data[i]);
+          }
+        }
     });
   }
 
   handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
+    // console.log('Various parameters', pagination, filters, sorter);
     this.setState({
       filteredInfo: filters,
       sortedInfo: sorter,
@@ -77,7 +105,7 @@ export default class Showtime extends React.Component {
       title: 'Timestamp',
       dataIndex: 'ts',
       key: 'ts',
-      sorter: (a, b) => a.Timestamp - b.Timestamp,
+      sorter: (a, b) => a.ts - b.ts,
       sortOrder: sortedInfo.columnKey === 'ts' && sortedInfo.order,
     }
     /*
